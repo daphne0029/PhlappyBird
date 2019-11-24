@@ -12,6 +12,10 @@ var ProcessorFactory = function(model) {
     }
 
     processor.physics = function(model, period) {
+        const actionTypes = {
+            'bird': 'gravity',
+            'obstacle': 'constantMovement',
+        }
         for (const type in model.viewObject) {
             if (model.viewObject[type].factory) {
                 const factory = model.viewObject[type].factory;
@@ -36,7 +40,7 @@ var ProcessorFactory = function(model) {
                     'y': shape.y,
                     'dx': shape.dx,
                     'dy': shape.dy,
-                }, 'gravity');
+                }, actionTypes[type]);
             }
         }
     }

@@ -8,9 +8,10 @@ var RendererFactory = function(model, ctx){
             // get individual shapeObj
             switch(shape) {
                 case 'bird':
-                    renderer.renderBird(
-                        model.viewObject.bird.factory,
-                        0);
+                    renderer.renderBird(model.viewObject.bird.factory, 0);
+                    break;
+                case 'obstacle':
+                    renderer.renderObstable(model.viewObject.obstacle.factory);
                     break;
                 default:
                     break;
@@ -24,9 +25,10 @@ var RendererFactory = function(model, ctx){
             // get individual shapeObj
             switch(shape) {
                 case 'bird':
-                    renderer.renderBird(
-                        model.viewObject.bird.factory,
-                        currTS);
+                    renderer.renderBird(model.viewObject.bird.factory, currTS);
+                    break;
+                case 'obstacle':
+                    renderer.renderObstable(model.viewObject.obstacle.factory);
                     break;
                 default:
                     break;
@@ -37,6 +39,11 @@ var RendererFactory = function(model, ctx){
     renderer.renderBird = function(birdFactory, currTS) {
         birdFactory.draw(currTS, renderer.ctx);
     }
+
+    renderer.renderObstable = function(obstableFactory) {
+        obstableFactory.draw(renderer.ctx);
+    }
+
 
     return renderer;
 }

@@ -1,10 +1,60 @@
-var ObstacleFactory = function(wallOptions){
-    // shape.prototype.draw()
+/***************************************************
+ *                Obstacle Factory 
+ **************************************************/
+var ObstacleFactory = function(wallOptions) {
+    // Brick settings
+
+    // wall settings
+    this.x = wallOptions.x;
+    this.y = wallOptions.y;
+    this.dx = wallOptions.dx;
+    this.dy = wallOptions.dy;
+    this.wallColor = 'rgb(119, 54, 14)';
+}
+
+ObstacleFactory.prototype.draw = function(ctx) {
+    this.drawrWall(ctx);
+}
+
+ObstacleFactory.prototype.drawrWall = function(ctx) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, 150, 100);
+    ctx.stroke();
+    ctx.restore();
+}
+
+ObstacleFactory.prototype.drawOneLayerOfBricks = function(offset) {
 
 }
 
-var BirdFactory = function(avatarOptions){
-    // shape.prototype.draw()
+ObstacleFactory.prototype.drawBrick = function() {
+
+}
+
+ObstacleFactory.prototype.move = function(curPosition, actionType) {
+    // update x and y
+    const canvas = document.querySelector('canvas');
+    console.log(actionType);
+    console.log(curPosition);
+    switch(actionType) {
+        case 'constantMovement':
+            this.x = Math.ceil(curPosition.x);
+            this.dx = curPosition.dx;
+
+            // console.log(Math.ceil(curPosition.x));
+            // console.log(curPosition.dx);
+            break;
+        default:
+            break;
+    }
+}
+
+/***************************************************
+ *                 Bird Factory 
+ **************************************************/
+
+var BirdFactory = function(avatarOptions) {
     this.x = avatarOptions.x;
     this.y = avatarOptions.y;
     this.dx = avatarOptions.dx;
@@ -37,7 +87,6 @@ BirdFactory.prototype.move = function(curPosition, actionType) {
         case 'moveup':
             if (this.y > 0) {
                 this.dy = curPosition.dy;
-                console.log(this.y);
             }
             break;
         default:
